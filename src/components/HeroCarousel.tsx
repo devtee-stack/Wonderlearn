@@ -9,7 +9,7 @@ interface HeroCarouselProps {
 const slides = [
   {
     image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=1600&q=80",
-    title: "Welcome to the Alumni Association of the Department of Philosophy",
+    title: "Welcome to the Alumni Association of the Department of Philosophy, UNIZIK",
     description: "Connect with fellow alumni, discover career paths, attend events, and mentor the next generation.",
     cta1: "Join Now",
     cta2: "Explore Directory",
