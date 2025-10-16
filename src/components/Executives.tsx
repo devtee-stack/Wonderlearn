@@ -10,13 +10,13 @@ const Executives = () => {
       bio: "Leading the alumni network with vision and dedication",
     },
     {
-      name: "Prof. Amina Yusuf",
+      name: "Joy Amadi",
       position: "Vice President",
       image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
       bio: "Fostering academic excellence and professional growth",
     },
     {
-      name: "Dr. Emeka Nwosu",
+      name: "Dr. Ogochukwu Okpokwasili",
       position: "Secretary General",
       image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=600&q=80",
       bio: "Ensuring effective communication and organization",
