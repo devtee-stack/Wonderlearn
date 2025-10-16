@@ -48,6 +48,7 @@ const Header = ({ openAuthModal }: HeaderProps) => {
   const navLinks = [
     { label: "Home", id: "home" },
     { label: "About", id: "about" },
+    { label: "Executives", id: "executives" },
     { label: "Directory", id: "directory" },
     { label: "Careers", id: "careers" },
     { label: "Events", id: "events" },

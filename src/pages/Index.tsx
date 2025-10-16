@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import HeroCarousel from "@/components/HeroCarousel";
 import PresidentDesk from "@/components/PresidentDesk";
 import About from "@/components/About";
+import Executives from "@/components/Executives";
 import Directory from "@/components/Directory";
 import Careers from "@/components/Careers";
 import Events from "@/components/Events";
@@ -41,7 +42,11 @@ const Index = () => {
           <About />
         </section>
 
-        <section id="directory" className="py-16 md:py-24">
+        <section id="executives" className="py-16 md:py-24">
+          <Executives />
+        </section>
+
+        <section id="directory" className="py-16 md:py-24 bg-secondary">
           <Directory />
         </section>
 
