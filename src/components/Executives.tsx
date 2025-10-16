@@ -22,23 +22,34 @@ const Executives = () => {
       bio: "Ensuring effective communication and organization",
     },
     {
-      name: "Mrs. Ngozi Okafor",
-      position: "Treasurer",
+      name: "Onyeka Uzowulu",
+      position: "Assistant Secretary",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
       bio: "Managing financial resources with transparency",
     },
     {
-      name: "Dr. Ibrahim Lawal",
-      position: "Public Relations Officer",
+      name: "Dr. Kelechi Ezeani",
+      position: "Financial Secretary",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
       bio: "Building strong community relationships",
     },
     {
-      name: "Dr. Funmi Adebayo",
-      position: "Director of Events",
+      name: "Anthony Nwokoye",
+      position: "Treasurer",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
       bio: "Organizing impactful alumni gatherings and programs",
     },
+    {
+      name: "Dr. Kizito Okoli",
+      position: "Director of Socials",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+      bio: "Organizing impactful alumni gatherings and programs",
+    },
+    {
+      name: "Francis Aleke",
+      position: "Public a",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+      bio: "Organizing impactful alumni gatherings and programs",
   ];
 
   const trustees = [
