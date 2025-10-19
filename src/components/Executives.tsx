@@ -55,7 +55,7 @@ const Executives = () => {
 
   const trustees = [
     {
-      name: "Prof. Oluwaseun Adeyemi",
+      name: "Dr. Austin Ezejiofor",
       position: "Board Chairman",
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
       bio: "Distinguished professor and thought leader in African Philosophy",
