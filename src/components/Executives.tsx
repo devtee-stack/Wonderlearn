@@ -47,9 +47,10 @@ const Executives = () => {
     },
     {
       name: "Francis Aleke",
-      position: "Public a",
+      position: "Public Relations Officer",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
-      bio: "Organizing impactful alumni gatherings and programs",
+      bio: "Managing public relations and communications",
+    },
   ];
 
   const trustees = [
