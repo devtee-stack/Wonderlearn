@@ -13,7 +13,7 @@ import Forum from "@/components/Forum";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import AuthModal from "@/components/AuthModal";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Index = () => {
   const [authModalOpen, setAuthModalOpen] = useState(false);

@@ -13,8 +13,9 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { useProfile } from "@/hooks/useProfile";
 
 interface HeaderProps {
   openAuthModal: (mode: "login" | "register") => void;
@@ -23,8 +24,15 @@ interface HeaderProps {
 const Header = ({ openAuthModal }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, signOut } = useAuth();
+  const { profile } = useProfile();
   const navigate = useNavigate();
+  
+  const handleLogout = async () => {
+    await signOut();
+    toast.success("Logged out successfully");
+    navigate('/');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,11 +41,6 @@ const Header = ({ openAuthModal }: HeaderProps) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const handleLogout = () => {
-    logout();
-    toast.success("Logged out successfully");
-  };
 
   const navLinks = [
     { label: "Home", path: "/" },
@@ -103,7 +106,7 @@ const Header = ({ openAuthModal }: HeaderProps) => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="gold">
-                    Hi, {user.name.split(" ")[0]} <ChevronDown className="ml-2 h-4 w-4" />
+                    Hi, {profile?.full_name.split(" ")[0] || "User"} <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="bg-card">

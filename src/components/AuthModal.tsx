@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
 
 interface AuthModalProps {
@@ -19,9 +19,10 @@ const AuthModal = ({ open, onClose, mode, onModeChange }: AuthModalProps) => {
     email: "",
     password: "",
   });
-  const { login, register } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const { signUp, signIn } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (mode === "register") {
@@ -29,19 +30,38 @@ const AuthModal = ({ open, onClose, mode, onModeChange }: AuthModalProps) => {
         toast.error("Please complete all fields");
         return;
       }
-      register({ name: formData.name, email: formData.email, role: "member" });
+      
+      setIsLoading(true);
+      const { error } = await signUp(formData.email, formData.password, formData.name);
+      setIsLoading(false);
+      
+      if (error) {
+        toast.error(error.message || "Failed to create account");
+        return;
+      }
+      
       toast.success("Account created successfully! Welcome to UNIZIK Alumni.");
+      onClose();
+      setFormData({ name: "", email: "", password: "" });
     } else {
       if (!formData.email || !formData.password) {
         toast.error("Please enter email and password");
         return;
       }
-      login({ name: formData.email.split("@")[0], email: formData.email, role: "member" });
+      
+      setIsLoading(true);
+      const { error } = await signIn(formData.email, formData.password);
+      setIsLoading(false);
+      
+      if (error) {
+        toast.error(error.message || "Failed to sign in");
+        return;
+      }
+      
       toast.success("Signed in successfully!");
+      onClose();
+      setFormData({ name: "", email: "", password: "" });
     }
-    
-    onClose();
-    setFormData({ name: "", email: "", password: "" });
   };
 
   return (
@@ -102,8 +122,9 @@ const AuthModal = ({ open, onClose, mode, onModeChange }: AuthModalProps) => {
               type="submit"
               className="flex-1"
               variant="gold"
+              disabled={isLoading}
             >
-              {mode === "register" ? "Create Account" : "Sign In"}
+              {isLoading ? "Loading..." : mode === "register" ? "Create Account" : "Sign In"}
             </Button>
           </div>
           <div className="text-center text-sm">
