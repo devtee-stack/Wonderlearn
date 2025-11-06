@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/contexts/AuthContext";
 import { toast } from "sonner";
+import { z } from "zod";
 
 interface AuthModalProps {
   open: boolean;
@@ -12,6 +13,22 @@ interface AuthModalProps {
   mode: "login" | "register";
   onModeChange: (mode: "login" | "register") => void;
 }
+
+const signUpSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  password: z.string()
+    .min(8, "Password must be at least 8 characters")
+    .max(100, "Password must be less than 100 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number"),
+});
+
+const signInSchema = z.object({
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  password: z.string().min(1, "Password is required"),
+});
 
 const AuthModal = ({ open, onClose, mode, onModeChange }: AuthModalProps) => {
   const [formData, setFormData] = useState({
@@ -26,13 +43,14 @@ const AuthModal = ({ open, onClose, mode, onModeChange }: AuthModalProps) => {
     e.preventDefault();
     
     if (mode === "register") {
-      if (!formData.name || !formData.email || !formData.password) {
-        toast.error("Please complete all fields");
+      const result = signUpSchema.safeParse(formData);
+      if (!result.success) {
+        toast.error(result.error.errors[0].message);
         return;
       }
       
       setIsLoading(true);
-      const { error } = await signUp(formData.email, formData.password, formData.name);
+      const { error } = await signUp(result.data.email, result.data.password, result.data.name);
       setIsLoading(false);
       
       if (error) {
@@ -44,13 +62,14 @@ const AuthModal = ({ open, onClose, mode, onModeChange }: AuthModalProps) => {
       onClose();
       setFormData({ name: "", email: "", password: "" });
     } else {
-      if (!formData.email || !formData.password) {
-        toast.error("Please enter email and password");
+      const result = signInSchema.safeParse(formData);
+      if (!result.success) {
+        toast.error(result.error.errors[0].message);
         return;
       }
       
       setIsLoading(true);
-      const { error } = await signIn(formData.email, formData.password);
+      const { error } = await signIn(result.data.email, result.data.password);
       setIsLoading(false);
       
       if (error) {
